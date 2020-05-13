@@ -9,13 +9,19 @@ DCFLAGS         := -g -ggdb3 -O0 -Wall -pedantic -Wextra -Wundef -Wshadow \
                   -Wswitch-default -Wswitch-enum \
                   -Wunreachable-code -Winit-self
 
-RCFLAGS         := -O2 -fwhole-program
+RCFLAGS         := -O2 -g -fwhole-program \
+		  -Wall -pedantic -Wextra -Wundef -Wshadow \
+                  -Wpointer-arith -Wcast-align -Wstrict-prototypes -Wwrite-strings \
+                  -Wswitch-default -Wswitch-enum \
+                  -Wunreachable-code -Winit-self
 
 LDFLAGS		:= 
 
 SRC		:= $(wildcard *.c)
 INC		:= $(wildcard *.h)
 OBJ             := $(patsubst %.c, %.o, $(filter %.c,$(SRC)))
+
+LIBS		:= -lm
 
 .PHONY: debug
 debug: CFLAGS += $(DCFLAGS)
